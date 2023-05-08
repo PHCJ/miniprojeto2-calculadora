@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "center",
     flexDirection: "row",
+    backgroundColor:"#fff"
   },
   numBoxButton: {
     width: "60%",

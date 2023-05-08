@@ -5,7 +5,7 @@ import Display from '../Components/Display';
 
 const Basica = () => {
 
-  
+  const [display, setDisplay] = useState("0");
   const [valor, setValor] = useState(null);
   const [operator, setOperator] = useState(null);
 
