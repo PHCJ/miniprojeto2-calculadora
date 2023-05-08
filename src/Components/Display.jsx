@@ -1,11 +1,9 @@
 import { Text, View, StyleSheet } from 'react-native';
-import React, { useState } from 'react'
-
 
 export default function Display({value="0"}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.content}>{String(value)}</Text>
+      <Text style={styles.content}>{(String(value))}</Text>
     </View>
   )
 }

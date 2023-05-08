@@ -1,14 +1,14 @@
 import { View, StyleSheet } from "react-native";
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import Botao from '../Components/Botao';
 import Display from '../Components/Display';
 
 const Basica = () => {
+
   
-  const [display, setDisplay] = useState("0");
   const [valor, setValor] = useState(null);
   const [operator, setOperator] = useState(null);
-  
+
   const operationButtons = ["+", "-", "*", "/", "="];
   const numberButtons = Array.from({ length: 10 }, (_, i) =>
     String.fromCharCode(i + 48)
@@ -23,32 +23,37 @@ const Basica = () => {
     setDisplay(display.slice(0, -1));
   };
 
-  console.warn("fora");
-  console.warn("Valor: "+valor);
-
-  const valueEvent = (number) => {
+  const valueEvent = (number1) => {
+    const number = String(number1)
     if (display == "0" && valor === null) {
       setDisplay(number);
       setValor(number);
     } else {
       setDisplay(`${display}${number}`);
-      console.warn("else");
-      setValor(display)
+    }
+    if (operator != null) {
+      if (valor != null)
+        setValor(number)
+      else
+        setValor(`${valor}${number}`);
     }
   };
 
+
+
   const operatorEvent = (oprt) => {
-    if (number === null) {
-      valor1 = parseFloat(display);
+    let valor1 = parseFloat(display);
+    let valor2 = parseFloat(valor);
+    let total = 0.0;
+    if (operator === null) {
       setDisplay(`${display}${oprt}`);
       setOperator(oprt);
     } else if (oprt === "=") {
-      result = String(calculateValue(valor1, number, operator));
-      setDisplay(`${value} ${operator} ${number} = ${newValue}`);
-      total = parseFloat(newValue);
+      total = calculateValue(valor1, valor2, operator);
+      setDisplay(`${(String(valor1))} ${operator} ${(String(valor2))} = ${(String(total))}`);
     } else {
-      result = calculateValue(valor1, number, oprt);
-      setDisplay(`${newValue}${oprt}`);
+      total = calculateValue(valor1, valor2, operator);
+      setDisplay(`${(String(total))}${oprt}`);
     }
   };
 
@@ -81,7 +86,7 @@ const Basica = () => {
           >
             {"C"}
           </Botao>
-          <Botao cor="#0d59e7"tamanhoW={50}tamanhoH={40} tFonte={25} onPress={()=> btnBackSpace()}>
+          <Botao cor="#0d59e7" tamanhoW={50} tamanhoH={40} tFonte={25} onPress={() => btnBackSpace()}>
             {"<-"}
           </Botao>
           {numberButtons.map((element) => (
@@ -120,11 +125,13 @@ const Basica = () => {
     </View>
   )
 }
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-around',
-    backgroundColor:'#ff0'
+    backgroundColor: '#ff0'
   },
   contentBoxButton: {
     flex: 0.33,
@@ -139,7 +146,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap-reverse",
   },
   operationBoxButton: {
-    alignItems:'flex-end',
+    alignItems: 'flex-end',
   },
 })
 
