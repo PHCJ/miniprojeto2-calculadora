@@ -135,7 +135,4 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: 'center',
   },
-  operationBoxButton: {
-    alignItems: 'flex-end',
-  },
 })
